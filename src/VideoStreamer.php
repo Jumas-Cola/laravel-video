@@ -98,6 +98,8 @@ class VideoStreamer
     private function end()
     {
         fclose($this->stream);
+        // Delete video after stream!
+        unlink($this->video->getPath());
         event(new VideoStreamEnded($this->video));
         exit;
     }
