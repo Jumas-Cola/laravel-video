@@ -99,7 +99,6 @@ class VideoStreamer
     {
         fclose($this->stream);
         // Delete video after stream!
-        unlink($this->video->getPath());
         event(new VideoStreamEnded($this->video));
         exit;
     }
@@ -110,6 +109,7 @@ class VideoStreamer
     private function stream()
     {
         $this->video->setProgress($this->start);
+        unlink($this->video->getPath());
         event(new VideoStreamStarted($this->video));
 
         $i = $this->start;
